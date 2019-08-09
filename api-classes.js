@@ -58,23 +58,28 @@ class StoryList {
    * Returns the new story object
    */
 
-  async addStory(user, newStory) {
-    console.log("newStory is " + newStory);
-    console.log("the user is " + user);
+  async addStory(token, newStory) { 
+    console.log("newStory is ", newStory); // what is logged?
+    console.log("newStory is ", newStory); // what is logged here?
+    console.log("newStory is ", newStory); // and what is logged here?
+
+
+    // console.log("the user is ", token); // was user before "token"
+
 
     let newObj = {
-      "token": "YOUR_TOKEN_HERE",
+      "token": token,
       "story": {
-        "author": "Matt Lane",
-        "title": "The best story ever",
-        "url": "http://google.com"
+      "author": newStory.author,
+      "title": newStory.title,
+      "url": newStory.url
       }
     }
-
+    // what are you awaiting for? -->
     let story = await axios.post(`${BASE_URL}/stories`, newObj);
 
     // how do we find out how the API object looks? -- is there a container for our new object?
-
+    return story;
     }
 
 // 

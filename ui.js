@@ -53,6 +53,7 @@ $(async function() {
     // call the create method, which calls the API and then builds a new user instance
     const newUser = await User.create(username, password, name);
     currentUser = newUser;
+
     syncCurrentUserToLocalStorage();
     loginAndSubmitForm();
   });
@@ -221,21 +222,22 @@ $(async function() {
     }
   }
 
-  $("#submit-form button").on("click", function() { // fix this
-    let $author = $("#author").val()
-    let $title = $("#title").val()
-    let $url = $("#url").val()
+  $("#submit-form").on("submit", async function(e) { // fix this
+    e.preventDefault();
+    let author = $("#author").val()
+    let title = $("#title").val()
+    let url = $("#url").val()
 
-    // do we create an object here?
-    // let newStory = {
-    //   author: $author,
-    //   title: $title,
-    //   url: $url
-    // }
-
-   // let newStory = await storyList.addStory(currentUser, newStory);
-    
+    let newStory = {
+      "author": author,
+      "title": title,
+      "url": url
+    }
+    console.log("the current user is ", currentUser)
+    console.log("the newStory object is ", newStory);
+    let storyResponse = await storyList.addStory(currentUser.loginToken, newStory);
+    console.log("The story response is ", storyResponse);
     // Append this new story to the dom
   })
-  console.log("The current user in the ui.js file is " + currentUser)
+  //console.log("The current user in the ui.js file is " + currentUser)
 });
