@@ -107,7 +107,7 @@ class User {
 
     // these are all set to defaults, not passed in by the constructor
     this.loginToken = "";
-    this.favorites = [];
+    this.favorites = []; // array holds all of our favorite articles
     this.ownStories = [];
   }
 
@@ -189,7 +189,11 @@ class User {
     existingUser.loginToken = token;
 
     // instantiate Story instances for the user's favorites and ownStories
+
     existingUser.favorites = response.data.user.favorites.map(s => new Story(s));
+    //console.log(existingUser.favorites.unshift(existingUser.favorites));
+
+    //console.log(existingUser.favorites); // it's working -- objects are being saved to the server
     existingUser.ownStories = response.data.user.stories.map(s => new Story(s));
     return existingUser;
   }

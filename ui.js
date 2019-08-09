@@ -9,6 +9,7 @@ $(async function() {
   const $navLogin = $("#nav-login");
   const $navLogOut = $("#nav-logout");
 
+
   // global storyList variable
   let storyList = null;
 
@@ -162,6 +163,7 @@ $(async function() {
     // render story markup
     const storyMarkup = $(`
       <li id="${story.storyId}">
+        <i class="far fa-star"></i>
         <a class="article-link" href="${story.url}" target="a_blank">
           <strong>${story.title}</strong>
         </a>
@@ -196,7 +198,47 @@ $(async function() {
     $("#nav-submit").on("click", function() {  // added event listener for 
       $submitForm.show();
     })
-  }
+
+    $(".fa-star").on("click", async function(e) {
+      e.preventDefault();
+      $(this).toggleClass("far fas"); // far = empty , fas = solid star, toggle between empty and solid star
+
+      // TODO : Select the article that has been starred (an object) and assign it to a variable
+              // get the array from local storage?
+      
+
+      let newFavorite = e.target.closest("li");
+      //console.log("the newFavorite is ", newFavorite.id); 
+      
+      //console.log(currentUser);
+      // get story id from the li
+      let response = await axios.post(`https://hack-or-snooze-v3.herokuapp.com/users/${currentUser.username}/favorites/${newFavorite.id}`, {
+        token: currentUser.loginToken
+      })
+
+      // TODO: create a new Story instance
+      currentUser.favorites = response.data.user.favorites.map(s => new Story(s));
+     
+      console.log(currentUser.favorites);
+      // TODO: unshift the article into the currentuser.favorites array
+
+      
+    });
+    
+    // TODO : add the variable (starred article object) to the favorites array in the userObj
+    //currentUser.favorites.unshift($allStoriesList[0]); // (to the favorites array, add the article that is being clicked on)
+    
+    $("nav-favorites").on("click", function(e) {   // TODO : not hiding current info
+      e.preventDefault();
+      console.log("The favorites button has been clicked!"); // not showing up
+      $("#all-articles-list").hide();
+      $("#favorited-articles").show();
+    }) 
+    
+
+   
+
+  } // close showNavForLoggedInUser
 
   /* simple function to pull the hostname from a URL */
 
