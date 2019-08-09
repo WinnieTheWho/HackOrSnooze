@@ -31,7 +31,7 @@ class StoryList {
    *  - returns the StoryList instance.*
    */
 
-  // TODO: Note the presence of `static` keyword: this indicates that getStories
+  // Note the presence of `static` keyword: this indicates that getStories
   // is **not** an instance method. Rather, it is a method that is called on the
   // class directly. Why doesn't it make sense for getStories to be an instance method?
   //static keyword within class means fxn is a method on the class and not a method on the 
@@ -59,15 +59,36 @@ class StoryList {
    */
 
   async addStory(user, newStory) {
+    console.log("newStory is " + newStory);
+    console.log("the user is " + user);
+
+    let newObj = {
+      "token": "YOUR_TOKEN_HERE",
+      "story": {
+        "author": "Matt Lane",
+        "title": "The best story ever",
+        "url": "http://google.com"
+      }
+    }
+
+    let story = await axios.post(`${BASE_URL}/stories`, newObj);
+
+    // how do we find out how the API object looks? -- is there a container for our new object?
+
+    }
+
+// 
+
+    // event listener to check if the user is logged in
+    // create/append the [ submit, favorites, and my stories ] links in the navbar
+
     // TODO - Implement this functions!
+
+
     // this function should return the newly created story so it can be used in
     // the script.js file where it will be appended to the DOM
 
-  }
 }
-
-
-
 
 /**
  * The User class to primarily represent the current user.
@@ -190,5 +211,7 @@ class Story {
     this.storyId = storyObj.storyId;
     this.createdAt = storyObj.createdAt;
     this.updatedAt = storyObj.updatedAt;
+
+ 
   }
 }

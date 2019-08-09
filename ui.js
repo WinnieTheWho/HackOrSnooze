@@ -77,6 +77,7 @@ $(async function() {
     $loginForm.slideToggle();
     $createAccountForm.slideToggle();
     $allStoriesList.toggle();
+
   });
 
   /**
@@ -187,8 +188,13 @@ $(async function() {
   }
 
   function showNavForLoggedInUser() {
+    $("#main-nav").show(); 
     $navLogin.hide();
     $navLogOut.show();
+
+    $("#nav-submit").on("click", function() {  // added event listener for 
+      $submitForm.show();
+    })
   }
 
   /* simple function to pull the hostname from a URL */
@@ -215,5 +221,21 @@ $(async function() {
     }
   }
 
-  console.log(currentUser);
+  $("#submit-form button").on("click", function() { // fix this
+    let $author = $("#author").val()
+    let $title = $("#title").val()
+    let $url = $("#url").val()
+
+    // do we create an object here?
+    // let newStory = {
+    //   author: $author,
+    //   title: $title,
+    //   url: $url
+    // }
+
+   // let newStory = await storyList.addStory(currentUser, newStory);
+    
+    // Append this new story to the dom
+  })
+  console.log("The current user in the ui.js file is " + currentUser)
 });

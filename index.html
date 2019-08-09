@@ -15,6 +15,16 @@
 
   <nav>
     <b><a class="nav-link navbar-brand" href="#" id="nav-all">Hack or Snooze</a></b>
+
+    <section id="main-nav" class="main-nav-links hidden">
+      <span>|</span>
+      <a class="nav-link" href="#" id="nav-submit">submit</a>
+      <span>|</span>
+      <a class="nav-link" href="#" id="nav-favorites">favorites</a>
+      <span>|</span>
+      <a class="nav-link" href="#" id="nav-my-stories">my stories</a>
+    </section>
+
     <a class="nav-link nav-right" href="#" id="nav-login">login/create user</a>
     <span class="nav-link nav-right hidden" id="nav-welcome">
       <a href="#" id="nav-user-profile"></a>
@@ -25,6 +35,7 @@
   </nav>
  
   <section class="articles-container container">
+
     <!-- form for creating new articles -->
     <form action="" class="hidden" id="submit-form">
       <div>
@@ -90,7 +101,7 @@
       </div>
       <div class="login-input">
         <label for="login-password">password</label>
-        <input id="login-password" type="password">
+        <input id="login-password" autocomplete=“current-password” type="password">
       </div>
       <button type="submit">login</button>
       <hr>
@@ -107,7 +118,7 @@
       </div>
       <div class="login-input">
         <label for="create-account-password">password</label>
-        <input id="create-account-password" type="password">
+        <input id="create-account-password" autocomplete=“current-password” type="password">
       </div>
       <button type="submit">create account</button>
     </form>
