@@ -43,7 +43,7 @@ class StoryList {
 
     // turn the plain old story objects from the API into instances of the Story class
     const stories = response.data.stories.map(story => new Story(story));
-    
+
     // build an instance of our own class using the new array of stories
     const storyList = new StoryList(stories);
     //returns object with stories array { stories: Array(25)}
@@ -58,40 +58,38 @@ class StoryList {
    * Returns the new story object
    */
 
-  async addStory(token, newStory) { 
-    console.log("newStory is ", newStory); // what is logged?
-    console.log("newStory is ", newStory); // what is logged here?
-    console.log("newStory is ", newStory); // and what is logged here?
-
-
-    // console.log("the user is ", token); // was user before "token"
-
+  async addStory(token, newStory) {
+    // console.log("newStory",newStory);
 
     let newObj = {
       "token": token,
       "story": {
-      "author": newStory.author,
-      "title": newStory.title,
-      "url": newStory.url
+        "author": newStory.author,
+        "title": newStory.title,
+        "url": newStory.url
       }
     }
-    // what are you awaiting for? -->
-    let story = await axios.post(`${BASE_URL}/stories`, newObj);
+
+    // console.log("newOBj", newObj); // what is logged?
+
+    let response = await axios.post(`${BASE_URL}/stories`, newObj);
+
+    // console.log("story from API:", story);
 
     // how do we find out how the API object looks? -- is there a container for our new object?
-    return story;
-    }
+    return response.data.story;
+  }
 
-// 
+  // 
 
-    // event listener to check if the user is logged in
-    // create/append the [ submit, favorites, and my stories ] links in the navbar
+  // event listener to check if the user is logged in
+  // create/append the [ submit, favorites, and my stories ] links in the navbar
 
-    // TODO - Implement this functions!
+  // TODO - Implement this functions!
 
 
-    // this function should return the newly created story so it can be used in
-    // the script.js file where it will be appended to the DOM
+  // this function should return the newly created story so it can be used in
+  // the script.js file where it will be appended to the DOM
 
 }
 
@@ -125,7 +123,7 @@ class User {
   static async create(username, password, name) {
     const response = await axios.post(`${BASE_URL}/signup`, {
       user: {
-        username, 
+        username,
         password,
         name
       }
@@ -217,6 +215,6 @@ class Story {
     this.createdAt = storyObj.createdAt;
     this.updatedAt = storyObj.updatedAt;
 
- 
+
   }
 }

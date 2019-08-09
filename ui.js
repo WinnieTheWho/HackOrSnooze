@@ -233,11 +233,15 @@ $(async function() {
       "title": title,
       "url": url
     }
-    console.log("the current user is ", currentUser)
-    console.log("the newStory object is ", newStory);
+    // console.log("the current user is ", currentUser)
+    // console.log("the newStory object is ", newStory);
     let storyResponse = await storyList.addStory(currentUser.loginToken, newStory);
-    console.log("The story response is ", storyResponse);
+    // console.log("The story response is ", storyResponse);
     // Append this new story to the dom
+    let storyHtml = generateStoryHTML(storyResponse);
+    $allStoriesList.prepend(storyHtml);
+
   })
-  //console.log("The current user in the ui.js file is " + currentUser)
+
+  
 });
